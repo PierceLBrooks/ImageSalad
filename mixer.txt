@@ -1,0 +1,2 @@
+
+python main.py mixer mixer/suzanne.png mixer/utah_teapot.png
