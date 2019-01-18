@@ -5,8 +5,8 @@ import vector as vec
 import utilities as util
 import grid as g
 
-def mix(origin, target):
-    return origin.getCopy()
+def mix(origin, target, rate):
+    return origin.getCopy().mix(target, rate)
 
 def run(arguments):
     if (len(arguments) < 2):
@@ -19,10 +19,16 @@ def run(arguments):
         return None
     grid = left
     grids = []
-    grids.append(left.getCopy())
+    #grids.append(left.getCopy())
     steps = 5
+    rate = 1.0/float(steps)
     for i in range(abs(int(steps))):
         print(i)
-        grids.append(mix(grid, right))
-    grids.append(right.getCopy())
+        grid = mix(grid, right, rate)
+        grids.append(grid)
+    #grids.append(right.getCopy())
+    for i in range(len(grids)):
+        if not (grids[i].export("mixer/output/"+str(i+1))):
+            print("Failure on export "+str(i+1)+"!")
+            break
     return grids

@@ -1,2 +1,2 @@
 
-python main.py mixer mixer/suzanne.png mixer/utah_teapot.png
+python main.py mixer mixer/input/suzanne.png mixer/input/utah_teapot.png

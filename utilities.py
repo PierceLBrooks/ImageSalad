@@ -27,7 +27,7 @@ def getPath():
 def loadPixelVectors(path):
     grid = None
     try:
-        image = getPath()+str(path)
+        image = os.path.join(getPath(), str(path))
         print(image)
         image = Image.open(image)
         image = image.convert()
@@ -42,6 +42,9 @@ def loadPixelVectors(path):
         grid = None
         traceback.print_exc()
     return grid
+
+def getClamp(number, minimum, maximum):
+    return min(maximum, max(minimum, number))
 
 def getVectorCopy(vector):
 	result = []
