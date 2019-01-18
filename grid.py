@@ -30,6 +30,12 @@ class Grid(object):
     def getSize(self):
         return self.size
 
+    def getWidth(self):
+        return self.width
+
+    def getHeight(self):
+        return self.height
+
     def getUnit(self, x, y):
         if ((x < 0) or (x >= self.width)):
             return None
@@ -52,10 +58,13 @@ class Grid(object):
 
     def mix(self, other, rate):
         rows = []
-        for x in range(self.width):
+        width = min(other.getWidth(), self.width)
+        height = min(other.getHeight(), self.height)
+        for x in range(width):
             column = []
-            for y in range(self.height):
-                column.append(self.units[x][y]+vec.Vector(util.multiplyVector(other.getUnit(x, y)-self.units[x][y], rate)))
+            for y in range(height):
+                unit = self.units[x][y]
+                column.append(unit+vec.Vector(util.multiplyVector(other.getUnit(x, y)-unit, rate)))
             rows.append(column)
         self.units = rows
         return self
